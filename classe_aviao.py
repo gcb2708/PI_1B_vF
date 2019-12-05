@@ -9,30 +9,30 @@ import math
 class Airplane(object):
 
     def __init__(self, airX, airY, airW, airH, airImg):
-        self.airX = airX  # Posição do avião no eixo X
-        self.airY = airY  # Posição do avião no eixo Y
-        self.airW = airW  # Largura da imagem do avião
-        self.airH = airH  # Altura da imagem do avião
-        self.airImg = airImg  # Imagem do avião
-        self.airVelX = 0  # Velocidade HORIZONTAL
-        self.airVelY = 0  # Velocidade VERTICAL
-        self.airAX = 0  # Aceleração HORIZONTAL
-        self.airAY = 0  # Aceleração VERTICAL
+        self.airX = airX            # Posição do avião no eixo X
+        self.airY = airY            # Posição do avião no eixo Y
+        self.airW = airW            # Largura da imagem do avião
+        self.airH = airH            # Altura da imagem do avião
+        self.airImg = airImg        # Imagem do avião
+        self.airVelX = 0            # Velocidade HORIZONTAL
+        self.airVelY = 0            # Velocidade VERTICAL
+        self.airAX = 0              # Aceleração HORIZONTAL
+        self.airAY = 0              # Aceleração VERTICAL
 
-        self.gravity = 52.3  # Aceleração gravitacional do avião
-        self.fuel = 100  # Combustível
-        self.count_f = 0  # Contador para o combustível
-        self.airVelTotal = 0  # Velocidade total do avião
-        self.Frx = 0  # Força resultante em X
-        self.Fry = 0  # Força resultante em Y
-        self.densidade_meio = 0.208  # Densidade do ar quando a temperatura é de 5ºC
-        self.area_objeto = 170  # Área das asas avião
-        self.coef_arrasto = 0.031  # Coeficiente de arrasto
-        self.forca_arrasto = 0  # Força de arrasto
-        self.massa = 100  # Massa do avião
-        self.peso = self.massa * self.gravity  # Força peso
-        self.coef_sustentacao = 0.031  # Coeficiente de arrasto
-        self.forca_sustentacao = 0  # Força de sustentação
+        self.gravity = 52.3         # Aceleração gravitacional do avião
+        self.fuel = 100             # Combustível
+        self.count_f = 0            # Contador para o combustível
+        self.airVelTotal = 0        # Velocidade total do avião
+        self.Frx = 0                # Força resultante em X
+        self.Fry = 0                # Força resultante em Y
+        self.densidade_meio = 0.208     # Densidade do ar quando a temperatura é de 5ºC
+        self.area_objeto = 170          # Área das asas avião
+        self.coef_arrasto = 0.031       # Coeficiente de arrasto
+        self.forca_arrasto = 0          # Força de arrasto
+        self.massa = 100                # Massa do avião
+        self.peso = self.massa * self.gravity   # Força peso
+        self.coef_sustentacao = 0.031           # Coeficiente de arrasto
+        self.forca_sustentacao = 0              # Força de sustentação
 
     def draw(self):
         tela.blit(self.airImg, (self.airX, self.airY))
@@ -94,7 +94,7 @@ class Airplane(object):
     # Atualiza a posição VERTICAL do avião
     def atualizaY(self):
         # atualiza velocidade vertical
-        self.airVelY += (self.airAY) * (1 / 60)
+        self.airVelY += self.airAY * (1 / 60)
 
         # verificar se a velociade é máxima
         if self.airVelY >= 200:
@@ -103,7 +103,7 @@ class Airplane(object):
             self.airVelY = -200
 
         # atualiza posição vertical
-        self.airY += self.airVelY * (1 / 60) + 0.5 * (self.airAY) * ((1 / 60) ** 2)
+        self.airY += self.airVelY * (1 / 60) + 0.5 * self.airAY * ((1 / 60) ** 2)
 
         # limita inferiormente
         if self.airY > alturaTela - self.airH:
