@@ -11,3 +11,4 @@ class Fluido(object):
         self.forca_arrasto = 0
 
     def arrasto(self, velocidade):
+        pass
