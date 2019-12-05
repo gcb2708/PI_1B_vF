@@ -4,7 +4,7 @@ Arquivo principal do jogo
 import pygame
 from classe_personagem import Soldado
 from classe_aviao import Airplane
-from auxiliar import tela, larguraTela, alturaTela, display_message, clock
+from auxiliar import *
 
 pygame.init()
 
@@ -32,7 +32,7 @@ def soldado_loop():
     # Criando o personagem com o modelo da classe Soldado
     carlinhos = Soldado(
         perX=larguraTela * 0.45,
-        perY=alturaTela * 0.85,
+        perY=alturaTela * 0.7,
         perW=88,
         perH=88,
         perImg=pygame.image.load('Img/SoldadoRight/R00.png')
@@ -48,8 +48,34 @@ def soldado_loop():
     # boost
     boost = 0
 
+    ################################
+    fundoTela = pygame.image.load('Img/Backgrounds/bg_per_2_dim.png').convert()
+    xTela1 = 0
+    xTela2 = fundoTela.get_width()
+    ################################
+
     while True:
-        tela.fill((0, 0, 0))
+        ###########################################
+        tela.blit(fundoTela, (xTela1, 0))
+        tela.blit(fundoTela, (xTela2, 0))
+
+        # Se o personagem estiver dentro da região delimitada
+        # ou estiver parado, a tela não anda
+        if 0 <= carlinhos.perX < 500:
+            xTela1 -= 0
+            xTela2 -= 0
+        # Mas se estiver exatamente no limiar da região e
+        # estiver se movendo, a tela anfda também
+        if carlinhos.perX == 500 and direita is True:
+            xTela1 -= 1.4
+            xTela2 -= 1.4
+
+        # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
+        if xTela1 < fundoTela.get_width() * (-1):
+            xTela1 = fundoTela.get_width()
+        if xTela2 < fundoTela.get_width() * (-1):
+            xTela2 = fundoTela.get_width()
+        ###########################################
 
         # tratamento dos eventos
         for event in pygame.event.get():
@@ -81,7 +107,7 @@ def soldado_loop():
 
                 # verifica se está pulando
                 elif event.key == pygame.K_SPACE:
-                    if carlinhos.perY >= alturaTela - carlinhos.perH:
+                    if carlinhos.perY >= 408:
                         carlinhos.perVelY = -300
                         teste_pulo = True
                         boost = 0

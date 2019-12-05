@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="42c0838a-d981-4c4e-aa79-97e41fe3ba8b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auxiliar.py" beforeDir="false" afterPath="$PROJECT_DIR$/auxiliar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classe_aviao.py" beforeDir="false" afterPath="$PROJECT_DIR$/classe_aviao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Img/Backgrounds/background PI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Img/Backgrounds/background_2 PI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Img/Backgrounds/background_3 PI.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/classe_personagem.py" beforeDir="false" afterPath="$PROJECT_DIR$/classe_personagem.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -27,6 +28,9 @@
   <component name="ProjectId" id="1UZ025obLdxFZhjACo3ILokPu5B" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

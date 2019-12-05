@@ -22,8 +22,8 @@ class Soldado(object):
 
     # Atualiza a posição HORIZONTAL do personagem
     def anda(self, boost):
-        # varifica a posição do personagem no eixo Y
-        if self.perY < alturaTela - self.perW:
+        # verifica a posição do personagem no eixo Y
+        if self.perY < 408:
             boost = 0
 
         self.perX += (self.perVelX + boost) * (1 / 60)
@@ -34,10 +34,10 @@ class Soldado(object):
         else:
             self.teste_boost = 0
 
-        if self.perX > larguraTela - self.perW:
-            self.perX = larguraTela - self.perW
-
-        elif self.perX < 0:
+        # Limita o movimento hotizontal do personagem
+        if self.perX >= 500:
+            self.perX = 500
+        elif self.perX <= 0:
             self.perX = 0
 
         return True
@@ -49,8 +49,8 @@ class Soldado(object):
         # Cálculo da posição VERTICAL do personagem
         self.perY += self.perVelY * (1 / 60) + 0.5 * self.perAY * ((1 / 60) ** 2)
         # Limita a imagem inferiormente
-        if self.perY > alturaTela - self.perH:
-            self.perY = alturaTela - self.perH
+        if self.perY > 408:
+            self.perY = 408
             self.perVelY = 0
         return True
 
@@ -64,7 +64,7 @@ class Soldado(object):
             self.count_p = 0
 
         # verifica a posição do personagem no eixo Y
-        if self.perY >= alturaTela - self.perW:
+        if self.perY >= 408:
             teste_pulo = False
 
         # o personagem está pulando
