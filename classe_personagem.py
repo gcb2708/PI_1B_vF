@@ -4,19 +4,20 @@ Arquivo para criação da classe Soldado
 
 from auxiliar import *
 
+
 class Soldado(object):
 
     def __init__(self, perX, perY, perW, perH, perImg):
-        self.perX = perX        # Posição do personagem no eixo X
-        self.perY = perY        # Posição do personagem no eixo Y
-        self.perW = perW        # Largura da imagem do personagem
-        self.perH = perH        # Altura da imagem do personagem
-        self.perImg = perImg    # Imagem do personagem
-        self.perVelX = 0        # Velocidade HORIZONTAL do personagem
-        self.perVelY = 0        # Velocidade Vertical do personagem
-        self.perAY = 445.73     # Aceleração VERTICAL do personagem
-        self.count = 0          # Contador dos frames do personagem
-        self.count_p = 0        # Contador dos frames do pulo
+        self.perX = perX  # Posição do personagem no eixo X
+        self.perY = perY  # Posição do personagem no eixo Y
+        self.perW = perW  # Largura da imagem do personagem
+        self.perH = perH  # Altura da imagem do personagem
+        self.perImg = perImg  # Imagem do personagem
+        self.perVelX = 0  # Velocidade HORIZONTAL do personagem
+        self.perVelY = 0  # Velocidade Vertical do personagem
+        self.perAY = 445.73  # Aceleração VERTICAL do personagem
+        self.count = 0  # Contador dos frames do personagem
+        self.count_p = 0  # Contador dos frames do pulo
         self.teste_boost = 0  # Teste para boost
 
     # Atualiza a posição HORIZONTAL do personagem

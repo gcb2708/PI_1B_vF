@@ -2,6 +2,7 @@
 Arquivo para criação do fluido
 """
 
+
 class Fluido(object):
 
     def __init__(self):
