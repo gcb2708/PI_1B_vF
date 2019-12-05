@@ -61,14 +61,20 @@ def soldado_loop():
 
         # Se o personagem estiver dentro da região delimitada
         # ou estiver parado, a tela não anda
-        if 0 <= carlinhos.perX < 500:
+        if 0 <= carlinhos.perX < 450:
             xTela1 -= 0
             xTela2 -= 0
         # Mas se estiver exatamente no limiar da região e
-        # estiver se movendo, a tela anfda também
-        if carlinhos.perX == 500 and direita is True:
-            xTela1 -= 1.4
-            xTela2 -= 1.4
+        # estiver se movendo, a tela anda também
+        if carlinhos.perX == 450 and direita is True:
+            # Se NÃO tem boost, a tela anda mais devagar
+            if boost == 0:
+                xTela1 -= 1.6
+                xTela2 -= 1.6
+            # Se tem boost, anda mais rápido
+            else:
+                xTela1 -= 2.0
+                xTela2 -= 2.0
 
         # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
         if xTela1 < fundoTela.get_width() * (-1):
@@ -152,8 +158,34 @@ def mct_loop():
     # ângulo de ataque do avião
     angulo = 0
 
+    ################################
+    fundoTela = pygame.image.load('Img/Backgrounds/bg_air_3_dim.png').convert()
+    xTela1 = 0
+    xTela2 = fundoTela.get_width()
+    ################################
+
     while True:
-        tela.fill((0, 0, 0))
+        ###########################################
+        tela.blit(fundoTela, (xTela1, 0))
+        tela.blit(fundoTela, (xTela2, 0))
+
+        # Se o personagem estiver dentro da região delimitada
+        # ou estiver parado, a tela não anda
+        if 0 <= aviao.airX < 450:
+            xTela1 -= 0
+            xTela2 -= 0
+        # Mas se estiver exatamente no limiar da região e
+        # estiver se movendo, a tela anda também
+        if aviao.airX == 450:
+            xTela1 -= 1.6
+            xTela2 -= 1.6
+
+        # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
+        if xTela1 < fundoTela.get_width() * (-1):
+            xTela1 = fundoTela.get_width()
+        if xTela2 < fundoTela.get_width() * (-1):
+            xTela2 = fundoTela.get_width()
+        ###########################################
 
         # tratamento dos eventos
         for event in pygame.event.get():
@@ -166,10 +198,10 @@ def mct_loop():
             if event.type == pygame.KEYDOWN:
                 # esquerda
                 if event.key == pygame.K_LEFT:
-                    tracao = -80000
+                    tracao = -800000
                 # direita
                 elif event.key == pygame.K_RIGHT:
-                    tracao = 80000
+                    tracao = 800000
                 # mudar de figura
                 elif event.key == pygame.K_ESCAPE:
                     soldado_loop()

@@ -35,8 +35,8 @@ class Soldado(object):
             self.teste_boost = 0
 
         # Limita o movimento hotizontal do personagem
-        if self.perX >= 500:
-            self.perX = 500
+        if self.perX >= 450:
+            self.perX = 450
         elif self.perX <= 0:
             self.perX = 0
 
