@@ -159,7 +159,7 @@ def mct_loop():
     angulo = 0
 
     ################################
-    fundoTela = pygame.image.load('Img/Backgrounds/bg_air_3_dim.png').convert()
+    fundoTela = pygame.image.load('Img/Backgrounds/bg_air_esp_2.jpg').convert()
     xTela1 = 0
     xTela2 = fundoTela.get_width()
     ################################
@@ -171,12 +171,12 @@ def mct_loop():
 
         # Se o personagem estiver dentro da região delimitada
         # ou estiver parado, a tela não anda
-        if 0 <= aviao.airX < 450:
+        if 0 <= aviao.airX < 400:
             xTela1 -= 0
             xTela2 -= 0
         # Mas se estiver exatamente no limiar da região e
         # estiver se movendo, a tela anda também
-        if aviao.airX == 450:
+        if aviao.airX == 400:
             xTela1 -= 1.6
             xTela2 -= 1.6
 
@@ -198,19 +198,19 @@ def mct_loop():
             if event.type == pygame.KEYDOWN:
                 # esquerda
                 if event.key == pygame.K_LEFT:
-                    tracao = -800000
+                    tracao = -400000
                 # direita
                 elif event.key == pygame.K_RIGHT:
-                    tracao = 800000
+                    tracao = 400000
                 # mudar de figura
                 elif event.key == pygame.K_ESCAPE:
                     soldado_loop()
                 # cima
                 elif event.key == pygame.K_UP:
-                    angulo += 10
+                    angulo += 1
                 # baixo
                 elif event.key == pygame.K_DOWN:
-                    angulo += -10
+                    angulo += -1
 
             # botao foi solto
             if event.type == pygame.KEYUP:
@@ -221,10 +221,10 @@ def mct_loop():
         aviao.forca(angulo, tracao)
 
         if aviao.atualizaX():
-            aviao.draw()
+            aviao.draw(angulo)
 
         if aviao.atualizaY():
-            aviao.draw()
+            aviao.draw(angulo)
 
         if aviao.combustivel():
             game_start()
