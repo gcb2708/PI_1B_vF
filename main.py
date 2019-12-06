@@ -69,12 +69,12 @@ def soldado_loop():
         if carlinhos.perX == 450 and direita is True:
             # Se NÃO tem boost, a tela anda mais devagar
             if boost == 0:
-                xTela1 -= 1.6
-                xTela2 -= 1.6
+                xTela1 -= 2.2
+                xTela2 -= 2.2
             # Se tem boost, anda mais rápido
             else:
-                xTela1 -= 2.0
-                xTela2 -= 2.0
+                xTela1 -= 2.8
+                xTela2 -= 2.8
 
         # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
         if xTela1 < fundoTela.get_width() * (-1):
@@ -157,6 +157,8 @@ def mct_loop():
     tracao = 0
     # ângulo de ataque do avião
     angulo = 0
+    teste_angulo = False
+    sentido_angulo = 0
 
     ################################
     fundoTela = pygame.image.load('Img/Backgrounds/bg_air_esp_2.jpg').convert()
@@ -174,11 +176,12 @@ def mct_loop():
         if 0 <= aviao.airX < 400:
             xTela1 -= 0
             xTela2 -= 0
+
         # Mas se estiver exatamente no limiar da região e
         # estiver se movendo, a tela anda também
-        if aviao.airX == 400:
-            xTela1 -= 1.6
-            xTela2 -= 1.6
+        if aviao.airX == 400 and aviao.airVelX != 0:
+            xTela1 -= 1.8
+            xTela2 -= 1.8
 
         # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
         if xTela1 < fundoTela.get_width() * (-1):
@@ -198,25 +201,37 @@ def mct_loop():
             if event.type == pygame.KEYDOWN:
                 # esquerda
                 if event.key == pygame.K_LEFT:
-                    tracao = -400000
+                    tracao = -1000000
                 # direita
                 elif event.key == pygame.K_RIGHT:
-                    tracao = 400000
+                    tracao = 1000000
+                    aviao.teste_combustivel = True
                 # mudar de figura
                 elif event.key == pygame.K_ESCAPE:
                     soldado_loop()
                 # cima
                 elif event.key == pygame.K_UP:
-                    angulo += 1
+                    teste_angulo = True
+                    sentido_angulo = 1
                 # baixo
                 elif event.key == pygame.K_DOWN:
-                    angulo += -1
+                    teste_angulo = True
+                    sentido_angulo = -1
 
             # botao foi solto
             if event.type == pygame.KEYUP:
                 # esquerda ou direia
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     tracao = 0
+                elif event.key == pygame.K_UP or pygame.K_DOWN:
+                    teste_angulo = False
+                    sentido_angulo = 0
+
+        if teste_angulo:
+            if sentido_angulo == 1:
+                angulo += 0.1
+            elif sentido_angulo == -1:
+                angulo -= 0.1
 
         aviao.forca(angulo, tracao)
 

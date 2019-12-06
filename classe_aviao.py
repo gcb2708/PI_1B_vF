@@ -33,6 +33,8 @@ class Airplane(object):
         self.D = 0                              # Força de arrasto
         self.Cs = 0.031                         # Coeficiente de arrasto
         self.S = 0                              # Força de sustentação
+        self.teste_combustivel = False          # Para evitar bugs no contador de combustivel
+        self.teste_decolagem = False            # Testa se o avião já decolou
 
     def draw(self, angulo):
         # teste chão
@@ -50,6 +52,15 @@ class Airplane(object):
         self.D = (1 / 2) * self.Cd * self.d * self.A * (self.airVelTotal ** 2)
         # Cálculo da força de sustentação
         self.S = (1 / 2) * self.Cs * self.d * self.A * (self.airVelTotal ** 2)
+
+        """
+        list_blocks = []
+        for i in range(10):
+            list_blocks.append(Block())
+
+        for block in list_blocks:
+            cehcjk
+        """
 
         # Se a velocidade VERTICAL é zero
         if self.airVelY == 0:
@@ -117,32 +128,29 @@ class Airplane(object):
         return True
 
     def combustivel(self):
-        # altualizar o valor do combustível
-        if self.count_f >= 100:
-            self.count_f = 0
-        else:
-            self.count_f += 0.001
-            self.fuel -= 0.0001
+        # Primeiramente, verifica se o avião levantou voo
+        if self.teste_combustivel:
+            # Atualizar o valor do combustível
+            if self.count_f >= 100:
+                self.count_f = 0
+            else:
+                self.count_f += 0.001
+                self.fuel -= 0.0001
+            # Verifica se tem aceleração em alguma direção
+            if self.airAX != 0 or self.airAY != 0:
+                self.fuel -= 0.002
 
-        # verifica se o combustível acabou
+        # Verifica se o combustível acabou
         if self.fuel <= 0:
             self.airAY = 0
             self.airAX = 0
             self.fuel = 0
             display_message("Sem combustível!!!!", (255, 255, 255))
 
-            # se chegou na base da tela sem combustível
+            # Se chegou na base da tela sem combustível
             if self.airY >= alturaTela - self.airH:
                 time.sleep(2)
                 return True
-
-        # verifica se o avião levantou voo
-        if self.airX <= 0 and self.airY >= alturaTela - self.airH:
-            self.fuel = 100
-
-        # verifica se tem aceleração em alguma direção
-        if self.airAX != 0 or self.airAY != 0:
-            self.fuel -= 0.0002
 
         # Mostra o combustível
         fuel_message("Combustível: {:.2f} %".format(self.fuel), (255, 255, 255))
