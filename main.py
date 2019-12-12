@@ -5,6 +5,7 @@ import pygame
 from classe_personagem import Soldado
 from classe_aviao import Airplane
 from auxiliar import *
+from classe_serra import Serra
 
 pygame.init()
 
@@ -38,6 +39,14 @@ def soldado_loop():
         perImg=pygame.image.load('Img/SoldadoRight/R00.png')
     )
 
+    # Criando o obstáculo serra com o modelo da classe Serra
+    saw = Serra(
+        x=300,
+        y=424,
+        larg=64,
+        alt=64
+    )
+
     # verificar o lado do movimento
     esquerda = False
     direita = False
@@ -58,6 +67,7 @@ def soldado_loop():
         ###########################################
         tela.blit(fundoTela, (xTela1, 0))
         tela.blit(fundoTela, (xTela2, 0))
+        saw.draw()
 
         # Se o personagem estiver dentro da região delimitada
         # ou estiver parado, a tela não anda
