@@ -19,9 +19,9 @@ class Serra(object):
                     pygame.image.load('Img/Serra/SAW3.png')]
 
     def draw(self):
-        self.hitbox = (self.x + 5, self.y + 5, self.larg - 10, self.alt)
+        self.hitbox = (self.x, self.y, self.larg - 10, self.alt)
         if self.aniCount >= 8:
             self.aniCount = 0
-        tela.blit(pygame.transform.scale(self.img[self.aniCount // 2], (64, 64)), (self.x, self.y))
+        tela.blit(pygame.transform.scale(self.img[self.aniCount // 2], (50, 50)), (self.x, self.y))
         self.aniCount += 1
         pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)

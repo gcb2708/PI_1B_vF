@@ -50,6 +50,8 @@ framesPuloE = [pygame.image.load('Img/SoldadoPuloE/P00E.png'),
                pygame.image.load('Img/SoldadoPuloE/P04E.png'),
                pygame.image.load('Img/SoldadoPuloE/P05E.png')]
 
+obstaculos = []
+
 
 # renderiza o texto
 def text_objects(text, font, color):

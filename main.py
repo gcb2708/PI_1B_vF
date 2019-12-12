@@ -6,6 +6,8 @@ from classe_personagem import Soldado
 from classe_aviao import Airplane
 from auxiliar import *
 from classe_serra import Serra
+import random
+from pygame.locals import  *
 
 pygame.init()
 
@@ -39,14 +41,6 @@ def soldado_loop():
         perImg=pygame.image.load('Img/SoldadoRight/R00.png')
     )
 
-    # Criando o obstáculo serra com o modelo da classe Serra
-    saw = Serra(
-        x=300,
-        y=424,
-        larg=64,
-        alt=64
-    )
-
     # verificar o lado do movimento
     esquerda = False
     direita = False
@@ -61,30 +55,45 @@ def soldado_loop():
     fundoTela = pygame.image.load('Img/Backgrounds/bg_per_2_dim.png').convert()
     xTela1 = 0
     xTela2 = fundoTela.get_width()
+
+    pygame.time.set_timer(USEREVENT+1, random.randrange(2500, 4000))
     ################################
 
     while True:
         ###########################################
         tela.blit(fundoTela, (xTela1, 0))
         tela.blit(fundoTela, (xTela2, 0))
-        saw.draw()
+
+        for serra in obstaculos:
+
+            if carlinhos.perX == 450 and direita is True:
+                if boost == 0:
+                    serra.x -= 3.0
+                else:
+                    serra.x -= 4.0
+
+            serra.draw()
+
+            if serra.x < serra.larg * (-1):
+                obstaculos.pop(obstaculos.index(serra))
 
         # Se o personagem estiver dentro da região delimitada
         # ou estiver parado, a tela não anda
         if 0 <= carlinhos.perX < 450:
             xTela1 -= 0
             xTela2 -= 0
+
         # Mas se estiver exatamente no limiar da região e
         # estiver se movendo, a tela anda também
         if carlinhos.perX == 450 and direita is True:
             # Se NÃO tem boost, a tela anda mais devagar
             if boost == 0:
-                xTela1 -= 2.2
-                xTela2 -= 2.2
+                xTela1 -= 3.0
+                xTela2 -= 3.0
             # Se tem boost, anda mais rápido
             else:
-                xTela1 -= 2.8
-                xTela2 -= 2.8
+                xTela1 -= 4.0
+                xTela2 -= 4.0
 
         # "Joga o fundo de volta no fim da tela para aproveitar a imagem"
         if xTela1 < fundoTela.get_width() * (-1):
@@ -99,6 +108,11 @@ def soldado_loop():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+
+            #########
+            if event.type == USEREVENT+1:
+                obstaculos.append(Serra(810, 438, 50, 50))
+            #########
 
             # botao foi pressionado
             if event.type == pygame.KEYDOWN:
