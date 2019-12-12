@@ -66,6 +66,12 @@ def soldado_loop():
 
         for serra in obstaculos:
 
+            if serra.colisao(carlinhos.hitbox):
+                display_message("Você morreu!!", (255, 255, 255))
+                # pygame.time.delay(2000)
+                # pygame.quit()
+                # quit()
+
             if carlinhos.perX == 450 and direita is True:
                 if boost == 0:
                     serra.x -= 3.0

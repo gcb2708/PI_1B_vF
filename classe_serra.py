@@ -25,3 +25,10 @@ class Serra(object):
         tela.blit(pygame.transform.scale(self.img[self.aniCount // 2], (50, 50)), (self.x, self.y))
         self.aniCount += 1
         pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
+
+    def colisao(self, rect):
+        if rect[0] + rect[2] >= self.hitbox[0] or rect[0] <= self.hitbox[0] + self.hitbox[2]:
+            if rect[1] + rect[3] > self.hitbox[1]:
+                return True
+        return False
+

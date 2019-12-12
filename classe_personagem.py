@@ -19,6 +19,7 @@ class Soldado(object):
         self.count = 0              # Contador dos frames do personagem
         self.count_p = 0            # Contador dos frames do pulo
         self.teste_boost = 0        # Teste para boost
+        self.hitbox = (perX, perY, perW, perH)
 
     # Atualiza a posição HORIZONTAL do personagem
     def anda(self, boost):
@@ -39,6 +40,9 @@ class Soldado(object):
             self.perX = 450
         elif self.perX <= 0:
             self.perX = 0
+
+        self.hitbox = (self.perX + 8, self.perY + 15, self.perW - 22, self.perH - 22)
+        pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
 
         return True
 
