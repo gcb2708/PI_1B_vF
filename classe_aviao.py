@@ -27,19 +27,16 @@ class Airplane(object):
         self.airVelTotal = 0                    # Velocidade total do avião
         self.Frx = 0                            # Força resultante em X
         self.Fry = 0                            # Força resultante em Y
-        self.d = 1.2690                         # Densidade do ar quando a temperatura é de 5ºC
-        self.A = 510                            # Área das asas avião
+        self.d = 1.2                            # Densidade do ar quando a temperatura é de 5ºC
+        self.A = 1000                           # Área das asas avião
         self.Cd = 0.031                         # Coeficiente de arrasto
         self.D = 0                              # Força de arrasto
         self.Cs = 0.031                         # Coeficiente de arrasto
         self.S = 0                              # Força de sustentação
-        self.teste_combustivel = False          # Para evitar bugs no contador de combustivel
-        self.teste_decolagem = False            # Testa se o avião já decolou
+        self.teste_decolagem = False            # Teste se o avião já decolou
+        self.teste_combustivel = False          # Para evitar bugs no contador de combustível
 
     def draw(self, angulo):
-        # teste chão
-        if self.airY >= alturaTela - self.airH:
-            angulo = 0
         tela.blit(pygame.transform.rotate(self.airImg, angulo), (self.airX, self.airY))
 
     def forca(self, angulo, tracao):
@@ -52,15 +49,6 @@ class Airplane(object):
         self.D = (1 / 2) * self.Cd * self.d * self.A * (self.airVelTotal ** 2)
         # Cálculo da força de sustentação
         self.S = (1 / 2) * self.Cs * self.d * self.A * (self.airVelTotal ** 2)
-
-        """
-        list_blocks = []
-        for i in range(10):
-            list_blocks.append(Block())
-
-        for block in list_blocks:
-            cehcjk
-        """
 
         # Se a velocidade VERTICAL é zero
         if self.airVelY == 0:
@@ -121,12 +109,22 @@ class Airplane(object):
         if self.airY > 390:
             self.airY = 390
             self.airVelY = 0
+
         # limita superiormente
         elif self.airY < 20:
             self.airY = 20
             self.airVelY = 0
+
+        # Se o avião saiu da posição inicial
+        if self.airVelY < 0 and self.airVelX != 0:
+            self.teste_combustivel = True
+            # Verificar se o avião decolou
+            if self.airY < 350:
+                self.teste_decolagem = True
+
         return True
 
+    # Atualiza o combustível do avião
     def combustivel(self):
         # Primeiramente, verifica se o avião levantou voo
         if self.teste_combustivel:
@@ -135,10 +133,11 @@ class Airplane(object):
                 self.count_f = 0
             else:
                 self.count_f += 0.001
-                self.fuel -= 0.0001
+                self.fuel -= 0.01
+
             # Verifica se tem aceleração em alguma direção
             if self.airAX != 0 or self.airAY != 0:
-                self.fuel -= 0.002
+                self.fuel -= 0.02
 
         # Verifica se o combustível acabou
         if self.fuel <= 0:
@@ -148,9 +147,14 @@ class Airplane(object):
             display_message("Sem combustível!!!!", (255, 255, 255))
 
             # Se chegou na base da tela sem combustível
-            if self.airY >= alturaTela - self.airH:
-                time.sleep(2)
+            if self.airY >= 389:
                 return True
 
         # Mostra o combustível
         fuel_message("Combustível: {:.2f} %".format(self.fuel), (255, 255, 255))
+
+    # Colisão do avião
+    def collide(self):
+        # Chegou ao final da tela depois de decolar
+        if self.airY > 389 and self.teste_decolagem is True:
+            return True

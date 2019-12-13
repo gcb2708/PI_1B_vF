@@ -4,7 +4,6 @@ Arquivo para criação da classe Soldado
 
 from auxiliar import *
 
-
 class Soldado(object):
 
     def __init__(self, perX, perY, perW, perH, perImg):
@@ -19,31 +18,29 @@ class Soldado(object):
         self.count = 0              # Contador dos frames do personagem
         self.count_p = 0            # Contador dos frames do pulo
         self.teste_boost = 0        # Teste para boost
-        self.hitbox = (perX, perY, perW, perH)
 
     # Atualiza a posição HORIZONTAL do personagem
     def anda(self, boost):
         # verifica a posição do personagem no eixo Y
         if self.perY < 408:
             boost = 0
-
+        # Cálculo da posição HORIZONTAL do personagem
         self.perX += (self.perVelX + boost) * (1 / 60)
-
         # verificar se existe boost
         if boost != 0:
             self.teste_boost = -1
         else:
             self.teste_boost = 0
-
         # Limita o movimento hotizontal do personagem
         if self.perX >= 450:
             self.perX = 450
         elif self.perX <= 0:
             self.perX = 0
 
+        # Define a área do personagem
         self.hitbox = (self.perX + 8, self.perY + 15, self.perW - 22, self.perH - 22)
-        pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
-
+        # Desenha a área do personagem
+        # pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
         return True
 
     # Atualiza a posição VERTICAL do personagem
