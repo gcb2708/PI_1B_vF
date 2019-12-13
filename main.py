@@ -1,7 +1,7 @@
 """
 Arquivo principal do jogo
 """
-import pygame
+# import pygame
 import random
 from classe_personagem import Soldado
 from classe_aviao import Airplane
@@ -12,6 +12,7 @@ from pygame.locals import *
 pygame.init()
 
 loop_teste = 0
+
 
 def game_start():
     # carregar as imagens do menu
@@ -69,15 +70,15 @@ def game_start():
             # botão do mouse foi pressionado
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # caso queira jogar novamente
-                if teste_fase1 == True:
+                if teste_fase1:
                     if event.button == 1:
                         soldado_loop()
                 # caso queira voltar para o menu
-                elif teste_fase2 == True:
+                elif teste_fase2:
                     if event.button == 1:
                         mct_loop()
                 # caso queira sair
-                elif teste_sair == True:
+                elif teste_sair:
                     if event.button == 1:
                         intro = False
                         quit()
@@ -211,7 +212,7 @@ def soldado_loop():
                     boost = 0
 
             if event.type == USEREVENT+1:
-                r = 0 #random.randrange(0, 2)
+                r = 0  # random.randrange(0, 2)
                 if r == 0:
                     obstacles.append(Serra(810, 438, 50, 50))
 
@@ -223,6 +224,7 @@ def soldado_loop():
         # atualiza a tela
         pygame.display.update()
         clock.tick(60)
+
 
 def endScreen():
     global loop_teste
@@ -289,7 +291,7 @@ def endScreen():
             # botão do mouse foi pressionado
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # caso queira jogar novamente
-                if simm == True:
+                if simm:
                     if event.button == 1:
                         # Fase 1
                         if loop_teste == 1:
@@ -298,7 +300,7 @@ def endScreen():
                         elif loop_teste == 2:
                             mct_loop()
                 # caso queira sair
-                elif naoo == True:
+                elif naoo:
                     if event.button == 1:
                         # Menu
                         game_start()
@@ -306,6 +308,7 @@ def endScreen():
         # atualiza a tela
         pygame.display.update()
         clock.tick(60)
+
 
 def mct_loop():
     global loop_teste

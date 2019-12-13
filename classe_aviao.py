@@ -103,7 +103,7 @@ class Airplane(object):
             self.airVelY = -500
 
         # atualiza posição vertical
-        self.airY += self.airVelY * (1 / 60) + 0.5 * (self.airAY) * ((1/60) ** 2)
+        self.airY += self.airVelY * (1 / 60) + 0.5 * self.airAY * ((1/60) ** 2)
 
         # limita inferiormente
         if self.airY > 390:

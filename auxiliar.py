@@ -44,11 +44,12 @@ framesPulo = [pygame.image.load('Img/SoldadoPulo/P00.png'),
               pygame.image.load('Img/SoldadoPulo/P05.png')]
 
 framesPuloE = [pygame.image.load('Img/SoldadoPuloE/P00E.png'),
-              pygame.image.load('Img/SoldadoPuloE/P01E.png'),
-              pygame.image.load('Img/SoldadoPuloE/P02E.png'),
-              pygame.image.load('Img/SoldadoPuloE/P03E.png'),
-              pygame.image.load('Img/SoldadoPuloE/P04E.png'),
-              pygame.image.load('Img/SoldadoPuloE/P05E.png')]
+               pygame.image.load('Img/SoldadoPuloE/P01E.png'),
+               pygame.image.load('Img/SoldadoPuloE/P02E.png'),
+               pygame.image.load('Img/SoldadoPuloE/P03E.png'),
+               pygame.image.load('Img/SoldadoPuloE/P04E.png'),
+               pygame.image.load('Img/SoldadoPuloE/P05E.png')]
+
 
 # renderiza o texto
 def text_objects(text, font, color):
@@ -66,6 +67,7 @@ def display_message(text, color):
     tela.blit(TextSurf, TextRect)
     pygame.display.update()
 
+
 # apresenta texto na tela
 def menu_message(text, color):
     largeText = pygame.font.Font('freesansbold.ttf', 50)
@@ -75,6 +77,7 @@ def menu_message(text, color):
 
     tela.blit(TextSurf, TextRect)
     pygame.display.update()
+
 
 def fuel_message(text, color):
     largeText = pygame.font.Font('freesansbold.ttf', 15)

@@ -1,8 +1,8 @@
 """
 Arquivo para criação da classe Soldado
 """
-
 from auxiliar import *
+
 
 class Soldado(object):
 
@@ -38,9 +38,9 @@ class Soldado(object):
             self.perX = 0
 
         # Define a área do personagem
-        self.hitbox = (self.perX + 8, self.perY + 15, self.perW - 22, self.perH - 22)
+        self.hitbox = (self.perX + 20, self.perY + 15, self.perW - 45, self.perH - 22)
         # Desenha a área do personagem
-        # pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
+        pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
         return True
 
     # Atualiza a posição VERTICAL do personagem
