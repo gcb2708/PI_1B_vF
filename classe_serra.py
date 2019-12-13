@@ -28,7 +28,7 @@ class Serra(object):
         tela.blit(pygame.transform.scale(self.img[self.aniCount // 2], (50, 50)), (self.x, self.y))
         self.aniCount += 1
         # Desenha a área da serra
-        pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
 
     def collide(self, rect):
         # Teste para colisão no eixo X

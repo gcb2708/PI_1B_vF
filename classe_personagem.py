@@ -40,7 +40,7 @@ class Soldado(object):
         # Define a área do personagem
         self.hitbox = (self.perX + 20, self.perY + 15, self.perW - 45, self.perH - 22)
         # Desenha a área do personagem
-        pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(tela, (255, 0, 0), self.hitbox, 2)
         return True
 
     # Atualiza a posição VERTICAL do personagem

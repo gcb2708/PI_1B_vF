@@ -20,6 +20,8 @@ def game_start():
     Fase2 = pygame.transform.scale(pygame.image.load('Img/Menu/Fase2.png'), (150, 100))
     Sair = pygame.transform.scale(pygame.image.load('Img/Menu/Sair.png'), (150, 100))
 
+    # carlao = pygame.transform.scale(pygame.image.load('Img/Crash/Crash.png'), (800, 600))
+
     intro = True
     teste_fase1 = False
     teste_fase2 = False
@@ -31,6 +33,7 @@ def game_start():
     posS = (330, 440)
     while intro:
         tela.fill((255, 255, 255))
+        # tela.blit(carlao, (0, 0))
         tela.blit(Fase1, posF1)
         tela.blit(Fase2, posF2)
         tela.blit(Sair, posS)
@@ -232,11 +235,13 @@ def endScreen():
     if loop_teste == 1:
         # imagens do fundo
         fundoTela = pygame.image.load('Img/Backgrounds/bg_per_2_dim.png').convert()
+        cor = (0, 0, 0)
 
     # fase 2
     elif loop_teste == 2:
         # imagens do fundo
         fundoTela = pygame.image.load('Img/Backgrounds/bg_air_esp_2.jpg').convert()
+        cor = (255, 255, 255)
 
     # fundo da tela
     tela.blit(fundoTela, (0, 0))
@@ -244,7 +249,7 @@ def endScreen():
     simm = False
     naoo = False
     # imagens do menu
-    menu_message('Quer jogar novamente?', (0, 0, 0))
+    menu_message('Quer jogar novamente?', cor)
     sim = pygame.transform.scale(pygame.image.load('Img/Menu/Sim.png'), (80, 60))
     nao = pygame.transform.scale(pygame.image.load('Img/Menu/Nao.png'), (80, 60))
     # posição das imagens
@@ -398,6 +403,12 @@ def mct_loop():
             elif sentido_angulo == -1:
                 angulo -= 0.2
 
+            # Limita o angulo máximo do avião
+            if angulo >= 30:
+                angulo = 30
+            elif angulo <= -30:
+                angulo = -30
+
         aviao.forca(angulo, tracao)
 
         if aviao.atualizaX():
@@ -408,7 +419,7 @@ def mct_loop():
 
         # Fim de jogo
         if aviao.combustivel() or aviao.collide():
-            menu_message("Você Perdeu!", (0, 0, 0))
+            menu_message("Você Perdeu!", (255, 255, 255))
             pygame.time.delay(1000)
             loop_teste = 2
             endScreen()
